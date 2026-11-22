@@ -1,0 +1,56 @@
+{
+  "name": "australian-battles",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "build-regions": "tsx scripts/build-regions.ts",
+    "build-hero": "tsx scripts/build-hero.ts",
+    "emulators": "firebase emulators:start --only auth,firestore --project demo-australian-battles",
+    "dev:all": "npx concurrently -k -n emu,web \"npm:emulators\" \"npm:dev\"",
+    "bot": "tsx scripts/bot.ts",
+    "postinstall": "node -e \"const f=require(\\\"fs\\\");f.mkdirSync(\\\"public/maplibre\\\",{recursive:true});for(const n of [\\\"worker\\\",\\\"shared\\\"])f.copyFileSync(\\\"node_modules/maplibre-gl/dist/maplibre-gl-\\\"+n+\\\".mjs\\\",\\\"public/maplibre/maplibre-gl-\\\"+n+\\\".mjs\\\")\"",
+    "sim": "tsx scripts/sim.ts",
+    "sim:elim": "tsx scripts/sim-elim.ts",
+    "sim:leave": "tsx scripts/sim-leave.ts"
+  },
+  "dependencies": {
+    "@turf/turf": "^7.4.0",
+    "firebase": "^13.4.0",
+    "firebase-admin": "^14.5.1",
+    "jsqr": "^1.4.0",
+    "maplibre-gl": "^6.19.0",
+    "motion": "^14.14.0",
+    "next": "16.4.6",
+    "qrcode.react": "^4.2.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "server-only": "^0.0.1",
+    "zod": "^4.6.7"
+  },
+  "overrides": {
+    "firebase-admin": {
+      "jwks-rsa": "^3.2.2"
+    }
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "4.3.3",
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "concurrently": "^10.0.7",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "firebase-tools": "^15.37.0",
+    "tailwindcss": "4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,404 @@
+@import "tailwindcss";
+
+:root {
+  /* Deep sea-ink base, sand and Uluru warmth, turquoise reserved for the sea. */
+  --bg: #07161a;
+  --bg-2: #0d2a2f;
+  --ink: #f3ead7;
+  --ink-dim: #b4ab94;
+  --ink-faint: #7d7a69;
+  --accent: #cf6a3c;
+  --accent-glow: #e6bb7f;
+  --sea: #3fa6a1;
+  --line: rgba(236, 220, 186, 0.14);
+  --line-strong: rgba(230, 187, 127, 0.4);
+  --ok: #79c29b;
+  --bad: #e2705f;
+  /* Warnings: a warm orange-red, clearly louder than the accent orange but not a plain alarm red. */
+  --warn: #ea5a35;
+  --warn-glow: #f2845f;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-dim: var(--ink-dim);
+  --color-faint: var(--ink-faint);
+  --color-accent: var(--accent);
+  --color-glow: var(--accent-glow);
+  --color-sea: var(--sea);
+  --color-line: var(--line);
+  --color-ok: var(--ok);
+  --color-bad: var(--bad);
+  --color-warn: var(--warn);
+  --color-warn-glow: var(--warn-glow);
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 24px;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+/* The page background lives on its own fixed layer: `background-attachment: fixed` repaints on
+   every scroll frame on iOS and makes pages feel jumpy. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(1100px 650px at 88% -8%, rgba(207, 106, 60, 0.15), transparent 60%),
+    radial-gradient(900px 650px at -10% 108%, rgba(40, 140, 140, 0.22), transparent 62%),
+    linear-gradient(180deg, var(--bg-2), var(--bg) 55%);
+  transform: translateZ(0);
+}
+
+* {
+  -webkit-user-select: none;
+  user-select: none;
+}
+input,
+textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Glass surface from the design reference: hairline border, deep translucent blue */
+.glass {
+  background: linear-gradient(160deg, rgba(70, 98, 92, 0.3), rgba(10, 30, 34, 0.55));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  /* No backdrop blur: it sits on a smooth gradient anyway and is very costly on phones. */
+  box-shadow: inset 0 1px 0 rgba(255, 244, 220, 0.05);
+}
+
+/* Entrance animation on the compositor (transform + opacity only), so it stays smooth even while
+   the page is still hydrating. Delay via --d. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.rise {
+  /* `backwards`, not `both`: once finished the element returns to its normal styles. Keeping the end
+     transform would leave an invisible stacking layer that sits above earlier buttons and eats taps. */
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: var(--d, 0s);
+}
+
+/* Round header buttons (refresh, back): quiet until you use them. Placement comes from the caller,
+   who also makes them `relative`/`absolute` (the hit area below hangs off that). */
+.refresh-btn,
+.back-btn {
+  display: grid;
+  place-items: center;
+  height: 36px;
+  width: 36px;
+  border-radius: 9999px;
+  border: 1px solid rgba(236, 220, 186, 0.2);
+  background: rgba(255, 244, 220, 0.05);
+  color: var(--ink-dim);
+  outline: none;
+  cursor: pointer;
+  /* Always above page content (the caller makes it absolute): nothing may cover it. */
+  z-index: 30;
+  touch-action: manipulation;
+  transition:
+    color 0.25s,
+    border-color 0.25s,
+    background 0.25s,
+    transform 0.2s;
+}
+/* The circle looks small and quiet, but the tappable area is a full 44 px. */
+.refresh-btn::after,
+.back-btn::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+}
+.refresh-btn-map,
+.back-btn-map {
+  background: rgba(7, 22, 26, 0.5);
+  color: var(--ink-dim);
+}
+.refresh-btn:active:not(:disabled),
+.back-btn:active:not(:disabled) {
+  transform: scale(0.88);
+}
+@media (hover: hover) {
+  .refresh-btn:hover:not(:disabled),
+  .back-btn:hover:not(:disabled) {
+    color: var(--ink);
+  }
+}
+.refresh-btn:disabled {
+  cursor: default;
+}
+.back-arrow {
+  height: 18px;
+  width: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) {
+  .back-btn:hover .back-arrow {
+    transform: translateX(-2px);
+  }
+}
+.refresh-arrow,
+.refresh-check {
+  grid-area: 1 / 1;
+  height: 17px;
+  width: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition:
+    opacity 0.2s,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.refresh-check {
+  opacity: 0;
+  transform: scale(0.5);
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+}
+.refresh-ripple {
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--accent-glow);
+  opacity: 0;
+  pointer-events: none;
+}
+.refresh-btn[data-phase="spin"],
+.refresh-btn[data-phase="done"] {
+  color: var(--accent-glow);
+  border-color: var(--line-strong);
+}
+/* Each turn eases in and out, so the arrow feels like it winds up and snaps round. */
+.refresh-btn[data-phase="spin"] .refresh-arrow {
+  animation: refresh-spin 0.9s cubic-bezier(0.55, 0.05, 0.25, 1) infinite;
+}
+.refresh-btn[data-phase="done"] .refresh-arrow {
+  opacity: 0;
+  transform: rotate(120deg) scale(0.4);
+}
+.refresh-btn[data-phase="done"] .refresh-check {
+  opacity: 1;
+  transform: scale(1);
+  animation: refresh-draw 0.32s ease-out 0.05s forwards;
+}
+.refresh-btn[data-phase="done"] .refresh-ripple {
+  animation: refresh-ripple 0.6s ease-out;
+}
+.refresh-btn[data-phase="fail"] {
+  color: var(--bad);
+  animation: refresh-shake 0.4s;
+}
+@keyframes refresh-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes refresh-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes refresh-ripple {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+@keyframes refresh-shake {
+  20%,
+  60% {
+    transform: translateX(-3px);
+  }
+  40%,
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+/* QR scanner viewfinder */
+.scan-corner {
+  position: absolute;
+  height: 34px;
+  width: 34px;
+  border-color: var(--accent-glow);
+  pointer-events: none;
+}
+.scan-line {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 12%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+  box-shadow: 0 0 14px 1px rgba(230, 187, 127, 0.45);
+  animation: scan 2.2s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes scan {
+  to {
+    top: 86%;
+  }
+}
+
+/* Landing hero: regions light up one by one, the coast draws itself, the glow breathes. */
+.hero-art {
+  contain: layout paint;
+}
+.hero-glow {
+  position: absolute;
+  inset: 6% 2%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(63, 166, 161, 0.3), rgba(63, 166, 161, 0.08) 62%, transparent 100%);
+  opacity: 0;
+  transform: translateZ(0);
+  will-change: opacity;
+  animation:
+    hero-fade 1.4s ease-out 0.1s forwards,
+    hero-breathe 6s ease-in-out 1.6s infinite alternate;
+}
+.hero-region {
+  opacity: 0;
+  animation: hero-light 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 150ms);
+}
+.hero-coast {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+  opacity: 0.85;
+  animation: hero-draw 1.8s cubic-bezier(0.45, 0, 0.2, 1) 0.2s forwards;
+}
+@keyframes hero-fade {
+  to {
+    opacity: 0.85;
+  }
+}
+@keyframes hero-breathe {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes hero-light {
+  0% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+    stroke: #fff3d3;
+  }
+  100% {
+    opacity: 1;
+    stroke: #ecd9b0;
+  }
+}
+@keyframes hero-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.eyebrow {
+  color: var(--accent-glow);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.title-xl {
+  font-size: clamp(40px, 11vw, 64px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+/* Start-screen headline: same look as .title-xl, but grows on tablets and desktops. */
+.title-hero {
+  font-size: clamp(40px, 11vw, 64px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+@media (min-width: 768px) {
+  .title-hero {
+    font-size: clamp(68px, 9vw, 84px);
+  }
+}
+@media (min-width: 1024px) {
+  .title-hero {
+    font-size: clamp(72px, 6.6vw, 104px);
+    line-height: 0.98;
+  }
+}
+
+.glow-text {
+  text-shadow: 0 0 28px rgba(230, 187, 127, 0.16);
+}
+
+/* MapLibre */
+.maplibregl-canvas {
+  outline: none;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-line,
+  .refresh-btn[data-phase="spin"] .refresh-arrow {
+    animation: none;
+  }
+  .hero-glow {
+    animation: hero-fade 0.01ms forwards;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

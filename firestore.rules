@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Rooms are readable by any signed-in player; ALL writes go through the server API.
+    match /rooms/{code} {
+      allow read: if request.auth != null;
+      allow write: if false;
+      // Picks, correct answers and timings live here: never readable by clients.
+      match /private/{doc} {
+        allow read, write: if false;
+      }
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

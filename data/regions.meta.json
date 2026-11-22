@@ -1,0 +1,274 @@
+[
+  {
+    "id": "wa-north",
+    "name": "Kimberley & Pilbara",
+    "short": "WA North",
+    "areaKm2": 1117736,
+    "tier": 3,
+    "points": 4,
+    "label": [
+      121.413,
+      -19.238
+    ],
+    "neighbours": [
+      "nt-central",
+      "nt-top",
+      "wa-east",
+      "wa-southwest"
+    ]
+  },
+  {
+    "id": "wa-southwest",
+    "name": "South-West Coast",
+    "short": "WA South-West",
+    "areaKm2": 731729,
+    "tier": 3,
+    "points": 4,
+    "label": [
+      117.211,
+      -29.817
+    ],
+    "neighbours": [
+      "wa-east",
+      "wa-north"
+    ]
+  },
+  {
+    "id": "wa-east",
+    "name": "Goldfields & Nullarbor",
+    "short": "WA East",
+    "areaKm2": 680485,
+    "tier": 3,
+    "points": 4,
+    "label": [
+      125.251,
+      -29.258
+    ],
+    "neighbours": [
+      "nt-central",
+      "sa-north",
+      "sa-south",
+      "wa-north",
+      "wa-southwest"
+    ]
+  },
+  {
+    "id": "nt-top",
+    "name": "Top End",
+    "short": "NT Top End",
+    "areaKm2": 631999,
+    "tier": 3,
+    "points": 3,
+    "label": [
+      133.501,
+      -14.985
+    ],
+    "neighbours": [
+      "nt-central",
+      "qld-north",
+      "wa-north"
+    ]
+  },
+  {
+    "id": "nt-central",
+    "name": "Red Centre",
+    "short": "NT Central",
+    "areaKm2": 718932,
+    "tier": 3,
+    "points": 4,
+    "label": [
+      133.501,
+      -22.499
+    ],
+    "neighbours": [
+      "nt-top",
+      "qld-north",
+      "qld-west",
+      "sa-north",
+      "wa-east",
+      "wa-north"
+    ]
+  },
+  {
+    "id": "qld-north",
+    "name": "Far North Queensland",
+    "short": "QLD North",
+    "areaKm2": 539212,
+    "tier": 2,
+    "points": 3,
+    "label": [
+      143.456,
+      -15.308
+    ],
+    "neighbours": [
+      "nt-central",
+      "nt-top",
+      "qld-southeast",
+      "qld-west"
+    ]
+  },
+  {
+    "id": "qld-west",
+    "name": "Outback Queensland",
+    "short": "QLD West",
+    "areaKm2": 521026,
+    "tier": 2,
+    "points": 3,
+    "label": [
+      141.25,
+      -24.749
+    ],
+    "neighbours": [
+      "nsw-west",
+      "nt-central",
+      "qld-north",
+      "qld-southeast",
+      "sa-north"
+    ]
+  },
+  {
+    "id": "qld-southeast",
+    "name": "South-East Queensland",
+    "short": "QLD South-East",
+    "areaKm2": 671923,
+    "tier": 3,
+    "points": 4,
+    "label": [
+      149.026,
+      -24.839
+    ],
+    "neighbours": [
+      "nsw-east",
+      "nsw-west",
+      "qld-north",
+      "qld-west"
+    ]
+  },
+  {
+    "id": "sa-north",
+    "name": "Outback South Australia",
+    "short": "SA North",
+    "areaKm2": 588257,
+    "tier": 2,
+    "points": 3,
+    "label": [
+      135.001,
+      -28.248
+    ],
+    "neighbours": [
+      "nsw-west",
+      "nt-central",
+      "qld-west",
+      "sa-south",
+      "wa-east"
+    ]
+  },
+  {
+    "id": "sa-south",
+    "name": "Southern South Australia",
+    "short": "SA South",
+    "areaKm2": 397070,
+    "tier": 2,
+    "points": 2,
+    "label": [
+      135.195,
+      -34.434
+    ],
+    "neighbours": [
+      "nsw-west",
+      "sa-north",
+      "vic-west",
+      "wa-east"
+    ]
+  },
+  {
+    "id": "nsw-west",
+    "name": "Western New South Wales",
+    "short": "NSW West",
+    "areaKm2": 356055,
+    "tier": 2,
+    "points": 2,
+    "label": [
+      143.75,
+      -32.565
+    ],
+    "neighbours": [
+      "nsw-east",
+      "qld-southeast",
+      "qld-west",
+      "sa-north",
+      "sa-south",
+      "vic-east",
+      "vic-west"
+    ]
+  },
+  {
+    "id": "nsw-east",
+    "name": "Eastern New South Wales",
+    "short": "NSW East",
+    "areaKm2": 447623,
+    "tier": 2,
+    "points": 2,
+    "label": [
+      150.07,
+      -32.831
+    ],
+    "neighbours": [
+      "nsw-west",
+      "qld-southeast",
+      "vic-east"
+    ]
+  },
+  {
+    "id": "vic-west",
+    "name": "Western Victoria",
+    "short": "VIC West",
+    "areaKm2": 136422,
+    "tier": 1,
+    "points": 1,
+    "label": [
+      142.882,
+      -36.419
+    ],
+    "neighbours": [
+      "nsw-west",
+      "sa-south",
+      "tasmania",
+      "vic-east"
+    ]
+  },
+  {
+    "id": "vic-east",
+    "name": "Eastern Victoria",
+    "short": "VIC East",
+    "areaKm2": 90952,
+    "tier": 1,
+    "points": 1,
+    "label": [
+      147.389,
+      -37.469
+    ],
+    "neighbours": [
+      "nsw-east",
+      "nsw-west",
+      "tasmania",
+      "vic-west"
+    ]
+  },
+  {
+    "id": "tasmania",
+    "name": "Tasmania",
+    "short": "Tasmania",
+    "areaKm2": 67369,
+    "tier": 1,
+    "points": 1,
+    "label": [
+      146.158,
+      -41.611
+    ],
+    "neighbours": [
+      "vic-east",
+      "vic-west"
+    ]
+  }
+]
