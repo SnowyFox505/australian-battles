@@ -1,15 +1,28 @@
-﻿<div align="center">
+<div align="center">
+
+<img src="docs/logo.png" alt="Australian Battles logo" width="96">
 
 # Australian Battles
 
 **A live multiplayer territory quiz on a map of Australia.**<br>
 Join with a code or QR like Kahoot, pick a territory next to yours, answer the question, take the land.
 
-[**Play it live**](https://australian-battles.vercel.app) · Next.js · Firebase · installable PWA · phone, tablet and desktop
+<a href="https://australian-battles.vercel.app"><img src="https://img.shields.io/badge/%E2%96%B6%20%20Live%20app-australian--battles.vercel.app-cf6a3c?style=for-the-badge&labelColor=07161a" alt="Live app"></a>
 
 <br>
 
-<img src="docs/screenshots/start-desktop.jpg" alt="Australian Battles start screen on a desktop" width="880">
+<img src="https://img.shields.io/badge/Next.js-16-ffffff?style=flat-square&labelColor=07161a&logo=nextdotjs&logoColor=white" alt="Next.js">
+<img src="https://img.shields.io/badge/React-19-61dafb?style=flat-square&labelColor=07161a&logo=react&logoColor=white" alt="React">
+<img src="https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&labelColor=07161a&logo=typescript&logoColor=white" alt="TypeScript">
+<img src="https://img.shields.io/badge/Tailwind-4-38bdf8?style=flat-square&labelColor=07161a&logo=tailwindcss&logoColor=white" alt="Tailwind">
+<img src="https://img.shields.io/badge/Firebase-Firestore-ffca28?style=flat-square&labelColor=07161a&logo=firebase&logoColor=white" alt="Firebase">
+<img src="https://img.shields.io/badge/MapLibre-GL-3fa6a1?style=flat-square&labelColor=07161a&logo=maplibre&logoColor=white" alt="MapLibre">
+<img src="https://img.shields.io/badge/Vercel-fra1-ffffff?style=flat-square&labelColor=07161a&logo=vercel&logoColor=white" alt="Vercel">
+<img src="https://img.shields.io/badge/PWA-installable-cf6a3c?style=flat-square&labelColor=07161a&logo=pwa&logoColor=white" alt="PWA">
+
+<br><br>
+
+<img src="docs/hero.jpg" alt="Australian Battles on five phones: start screen, lobby with colour picker, choosing a territory, a quiz question and the round results" width="100%">
 
 </div>
 
@@ -60,6 +73,8 @@ It runs in the browser, can be installed on the home screen like an app, and sta
 </table>
 
 **Tablet and desktop**
+
+<div align="center"><img src="docs/devices.jpg" alt="Australian Battles on a desktop monitor and a tablet in landscape" width="100%"></div>
 
 <table>
   <tr>
@@ -206,6 +221,8 @@ Das Spiel läuft im Browser, lässt sich wie eine App auf den Home-Bildschirm le
 </table>
 
 **Tablet und Desktop**
+
+<div align="center"><img src="docs/devices.jpg" alt="Australian Battles am Desktop-Monitor und auf dem Tablet quer" width="100%"></div>
 
 <table>
   <tr>
